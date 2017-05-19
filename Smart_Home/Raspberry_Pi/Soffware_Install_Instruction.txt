@@ -54,7 +54,6 @@ $ sudo apt-get install gnome-schedule
 USAGE:
 @reboot sudo node /home/pi/myscript.js
 
-
 //-------------------------------------------------------------------------------------------------------------------------
 // List of NPM installed
 //-------------------------------------------------------------------------------------------------------------------------
@@ -62,4 +61,32 @@ USAGE:
 https://github.com/WiringPi/WiringPi-Node/blob/master/DOCUMENTATION.md
 Install
 $ npm install wiring-pi
+2> pi-gpio
+https://www.npmjs.com/package/pi-gpio
+$ npm install pi-gpio
+3> MQTT
+https://www.npmjs.com/package/mqtt
+$ npm install mqtt
+4> http-request
+https://www.npmjs.com/package/http-request
+$ npm install http-request
+5> PM2
+https://www.npmjs.com/package/pm2
+$ npm install -g pm2
+6> body-parser
+https://www.npmjs.com/package/body-parser
+$ npm install body-parser
+7> request
+https://www.npmjs.com/package/request
+$ npm install request
+8> Mongoose
+https://www.npmjs.com/package/mongoose
+$ npm install mongoose
+//-------------------------------------------------------------------------------------------------------------------------
+// Solved Issues
+//-------------------------------------------------------------------------------------------------------------------------
+1> Enable SSH on Rasbian from Windows
+https://www.youtube.com/watch?v=ud8QH6pkc0o
 
+2> Solving "Access-Control-Allow-Origin" in localhost NodeJS + Express
+https://www.youtube.com/watch?v=cUWcZ4FzgmI
