@@ -40,6 +40,21 @@ $ sudo service mongodb stop
 Start DB
 $ sudo mongod --dbpath /var/lib/mongodb
 
+4> Wifi GUI
+$ sudo apt-get install wpa_gui 
+$ sudo reboot
+
+5> SETTING UP AN APACHE WEB SERVER ON A RASPBERRY PI
+https://www.raspberrypi.org/documentation/remote-access/web-server/apache.md
+$ sudo apt-get install apache2 -y
+
+6> SCHEDULING TASKS WITH CRON
+https://www.raspberrypi.org/documentation/linux/usage/cron.md
+$ sudo apt-get install gnome-schedule
+USAGE:
+@reboot sudo node /home/pi/myscript.js
+
+
 //-------------------------------------------------------------------------------------------------------------------------
 // List of NPM installed
 //-------------------------------------------------------------------------------------------------------------------------
