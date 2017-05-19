@@ -21,6 +21,24 @@ $ node -v
 
 3> MongoDB
 https://diyprojects.io/mongodb-part-1-installation-windows-macos-raspberry-pi/#.WR7L1uvyiUl
+https://diyprojects.io/mongodb-part-1-installation-windows-macos-raspberry-pi/#.WR27QZJ97IV
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo apt-get install mongodb-server
+Binary file stored at:
+/usr/bin
+Data files stored at:
+/var/lib/mongodb
+check status:
+$ sudo service --status-all
+or:
+$ sudo service mongodb status
+start mongodb service:
+$ sudo service start mongodb
+stop mongodb service:
+$ sudo service mongodb stop
+Start DB
+$ sudo mongod --dbpath /var/lib/mongodb
 
 //-------------------------------------------------------------------------------------------------------------------------
 // List of NPM installed
