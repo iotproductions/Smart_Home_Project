@@ -90,3 +90,7 @@ https://www.youtube.com/watch?v=ud8QH6pkc0o
 
 2> Solving "Access-Control-Allow-Origin" in localhost NodeJS + Express
 https://www.youtube.com/watch?v=cUWcZ4FzgmI
+
+3> Fix Wiring Pi: Unable to determine hardware version. I see: Hardware   : BCM2835
+https://www.domoticz.com/forum/viewtopic.php?t=16852
+$ sudo rpi-update 52241088c1da59a359110d39c1875cda56496764
