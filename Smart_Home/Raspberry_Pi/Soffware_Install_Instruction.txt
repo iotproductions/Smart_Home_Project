@@ -94,3 +94,11 @@ https://www.youtube.com/watch?v=cUWcZ4FzgmI
 3> Fix Wiring Pi: Unable to determine hardware version. I see: Hardware   : BCM2835
 https://www.domoticz.com/forum/viewtopic.php?t=16852
 $ sudo rpi-update 52241088c1da59a359110d39c1875cda56496764
+
+4> Note that if you're currently using connect.bodyParser(), you will still get the deprecation warning for multipart. For now, you can ignore it since you should only see the warning message once at start up. If you want to avoid any warning messages, do this instead (which is what connect.bodyParser() will be in 3.0):
+
+On Express replace: 
+connect.bodyParser()
+by use:
+app.use(connect.urlencoded())
+app.use(connect.json())
