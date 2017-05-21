@@ -102,3 +102,6 @@ connect.bodyParser()
 by use:
 app.use(connect.urlencoded())
 app.use(connect.json())
+
+5> CAMMERA ERROR: 
+$ sudo chmod o+rwx /dev/vchiq                                  
