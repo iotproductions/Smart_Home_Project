@@ -97,7 +97,7 @@ $ sudo rpi-update 52241088c1da59a359110d39c1875cda56496764
 update 23/5/2017:
 https://isahatipoglu.com/2015/09/29/how-to-upgrade-or-downgrade-raspberrypis-kernel-servoblaster-problem-raspberry-pi2/
 Solved by pumps firmware version to 4.4.49
-
+$ sudo rpi-update 2ca627126e49c152beb1bf7abd7122ce076dcc65
 
 4> Note that if you're currently using connect.bodyParser(), you will still get the deprecation warning for multipart. For now, you can ignore it since you should only see the warning message once at start up. If you want to avoid any warning messages, do this instead (which is what connect.bodyParser() will be in 3.0):
 
