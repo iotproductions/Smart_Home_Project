@@ -107,5 +107,5 @@ by use:
 app.use(connect.urlencoded())
 app.use(connect.json())
 
-5> CAMMERA ERROR: 
+5> CAMMERA ERROR: mmal: Failed to run camera app. Please check for firmware updates
 $ sudo chmod o+rwx /dev/vchiq                                  
