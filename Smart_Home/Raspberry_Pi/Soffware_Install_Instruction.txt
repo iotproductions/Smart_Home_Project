@@ -116,3 +116,4 @@ kill $(pgrep raspistill)
 7> mjpg-streamer error
 E: Package 'libjpeg62-dev' has no installation candidate
 $ sudo apt-get install cmake libjpeg62-turbo-dev
+http://garyhall.org.uk/raspberry-pi-internet-enabled-camera.html 
