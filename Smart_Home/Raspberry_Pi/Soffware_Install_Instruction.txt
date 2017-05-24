@@ -109,3 +109,10 @@ app.use(connect.json())
 
 5> CAMMERA ERROR: mmal: Failed to run camera app. Please check for firmware updates
 $ sudo chmod o+rwx /dev/vchiq                                  
+
+6> KILL RASPISTILL Process
+kill $(pgrep raspistill) 
+
+7> mjpg-streamer error
+E: Package 'libjpeg62-dev' has no installation candidate
+$ sudo apt-get install cmake libjpeg62-turbo-dev
