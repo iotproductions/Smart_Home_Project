@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<body onload="getStatus()"> 
+<link rel="stylesheet" href="min.css">
+<script src="http.min.js"></script>
+<nav class="nav" tabindex="-1" onclick="this.focus()">
+    <div class="container">
+        <a class="pagename current" href="#">Home</a>
+        <a href="setting.html">Setting</a>
+    </div>
+</nav>
+	<h1>Smart Plug</h1><hr>
+	<h2>Control Panel</h2> 
+	<a class="btn btn-a smooth" onclick="clickHandle(this)" id="btn_id_device1" >Blue</a>
+	<a class="btn btn-b smooth" onclick="clickHandle(this)" id="btn_id_device2" >Green</a>
+	<a class="btn btn-c smooth" onclick="clickHandle(this)" id="btn_id_device3" >Red</a>
+	<a class="btn btn-classless smooth" onclick="clickHandle(this)" id="btn_id_device4" >Purple</a>
+
+<script>
+var request_id;
+var led_red_state;
+var led_green_state;
+var led_blue_state;
+var led_status_state;
+function getStatus()
+{
+	var url = 'rpc/GetStatus';
+	var request = new Http.Get(url, true);
+	request.start().then(function(resp) {
+		console.log(resp);
+		  if(resp[2] == 0)
+		  {
+			document.getElementById('btn_id_device4').className  = "btn btn-classless smooth";
+		  }
+		  else
+		  {
+			document.getElementById('btn_id_device4').className  = "btn btn-c smooth";
+		  }
+		  if(resp[12] == 0)
+		  {
+			document.getElementById('btn_id_device2').className  = "btn btn-classless smooth";
+		  }
+		  else
+		  {
+			document.getElementById('btn_id_device2').className  = "btn btn-b smooth";
+		  }
+		  if(resp[13] == 0)
+		  {
+			document.getElementById('btn_id_device1').className  = "btn btn-classless smooth";
+		  }
+		  else
+		  {
+			document.getElementById('btn_id_device1').className  = "btn btn-a smooth";
+		  }
+		  if(resp[15] == 0)
+		  {
+			document.getElementById('btn_id_device3').className  = "btn btn-classless smooth";
+		  }
+		  else
+		  {
+			document.getElementById('btn_id_device3').className  = "btn btn-c smooth";
+		  }
+	});
+}
+function setPin(pin, state)
+{
+	var json = JSON.stringify({
+	pin: pin,
+	value: state,
+	});
+	var url = 'rpc/GPIO.Toggle';
+	var request = new Http.Post(url,json, true);
+	request.start().then(function(resp) {
+		console.log(resp);
+		  if(resp.value == 0)
+		  {
+			document.getElementById(request_id).className  = "btn btn-classless smooth";
+		  }
+		  else
+		  {
+			switch(request_id)
+			{
+			case "btn_id_device1":
+				document.getElementById(request_id).className  = "btn btn-a smooth";
+			break;
+			case "btn_id_device2":
+				document.getElementById(request_id).className  = "btn btn-b smooth";
+			break;
+			case "btn_id_device3":
+				document.getElementById(request_id).className  = "btn btn-c smooth";
+			break;
+			case "btn_id_device4":
+				document.getElementById(request_id).className  = "btn btn-classless smooth";
+			break;
+			};
+		  }
+	});
+}
+
+function clickHandle(obj)
+{
+	console.log(obj.id);
+	request_id = (obj.id);
+	switch(obj.id)
+	{
+	case "btn_id_device1":
+		led_green_state = (led_green_state ? 0 : 1);
+		setPin(13,led_green_state);
+	break;
+	case "btn_id_device2":
+		led_red_state = (led_red_state ? 0 : 1);
+		setPin(12,led_red_state);
+	break;
+	case "btn_id_device3":
+		led_status_state = (led_status_state ? 0 : 1);
+		setPin(15,led_status_state);
+	break;
+	case "btn_id_device4":
+		led_blue_state = (led_blue_state ? 0 : 1);
+		setPin(2,led_blue_state);
+	break;
+	};
+	getStatus();
+}
+var refresh = setInterval(getStatus, 1000); // refresh page every 1s
+</script>
+</body>
+</html>
