@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<script src="http.min.js"></script>
+<script>
+function getWifiConfig(){
+	var url = '/rpc/Config.Get';
+	var request = new Http.Get(url, true);
+
+	request.start().then(function(responseText) {
+		console.log(responseText);
+		var json = (responseText);
+		document.getElementById("id_ap_ssid").textContent  	= (json.wifi.ap.ssid);
+		document.getElementById("id_ap_pass").textContent  	= (json.wifi.ap.pass);
+		document.getElementById("id_ap_ip").textContent  	= (json.wifi.ap.ip);
+		document.getElementById("id_sta_ssid").textContent  = (json.wifi.sta.ssid);
+		document.getElementById("id_sta_pass").textContent  = (json.wifi.sta.pass);
+		getStationIP();
+
+	}).fail(function(error, errorCode) {
+		console.log(error);
+		console.log(errorCode);	
+	});
+}
+function getStationIP(){
+	var url = '/rpc/Sys.GetInfo';
+	var request = new Http.Get(url, true);
+
+	request.start().then(function(responseText) {
+		console.log(responseText);
+		var json = (responseText);
+		document.getElementById("id_sta_ip").textContent=(json.wifi.sta_ip);
+
+	}).fail(function(error, errorCode) {
+		console.log(error);
+		console.log(errorCode);	
+	});
+	
+}
+function applyWifiConfig(){
+	var obj = {"config":{"wifi":{"ap":{"enable": true, "ssid": "ap_ssid", "pass": "ap_pass"}, "sta":{"enable":true, "ssid": "sta_ssid", "pass": "sta_pass"}}}};
+	obj.config.wifi.sta.ssid 	= document.getElementById("id_config_sta_ssid").value;
+	obj.config.wifi.sta.pass 	= document.getElementById("id_config_sta_pass").value;
+	obj.config.wifi.ap.ssid 	= document.getElementById("id_config_ap_ssid").value;
+	obj.config.wifi.ap.pass 	= document.getElementById("id_config_ap_pass").value;
+	var json;
+	try {
+        json = JSON.stringify(obj);
+    } catch(e) {
+        alert(e); // error in the above string (in this case, yes)!
+    }
+	console.log(json);
+	var url = '/rpc/Config.Set';
+	var request = new Http.Post(url, json, true);
+	request.start().then(function(response) {
+		console.log(response);
+	}).fail(function(error, errorCode){
+		console.log(error);
+		console.log(errorCode);
+	});
+}
+function saveWifiConfig(){
+	var url = '/rpc/Config.Save';
+	var request = new Http.Get(url, true);
+	request.start().then(function(responseText) {
+		console.log(responseText);
+		document.getElementById("id_sta_ip").textContent=(json.wifi.sta_ip);
+	}).fail(function(error, errorCode) {
+		console.log(error);
+		console.log(errorCode);	
+	});
+}
+function rebootDevice(){
+	var url =   '/rpc/Sys.Reboot';
+	var request = new Http.Get(url, true);
+	request.start().then(function(responseText) {
+		console.log(responseText);
+		document.getElementById("id_sta_ip").textContent=(json.wifi.sta_ip);
+	}).fail(function(error, errorCode) {
+		console.log(error);
+		console.log(errorCode);	
+	});
+}
+</script>
+<body onload="getWifiConfig()"> 
+<link rel="stylesheet" href="min.css">
+<nav class="nav" tabindex="-1" onclick="this.focus()">
+    <div class="container">
+        <a class="pagename current" href="/">Home</a>
+        <a href="setting.html">Setting</a>
+    </div>
+</nav>
+<h1>Smart Plug Config</h1><hr>
+<p><strong>Access Point Mode</strong></p>
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">SSID:</label>
+			<span  id="id_ap_ssid"></span><br>
+        </div>
+        <div class="pure-control-group">
+            <label for="password">Password:</label>
+			<span  id="id_ap_pass"></span>
+        </div>
+		<div class="pure-control-group">
+            <label for="ip">IP:</label>
+			<span  id="id_ap_ip"></span>
+        </div>
+    </fieldset>
+</form>
+<p><strong>Station Mode</strong></p>
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">SSID:</label>
+			<span  id="id_sta_ssid"></span><br>
+        </div>
+        <div class="pure-control-group">
+            <label for="password">Password:</label>
+			<span  id="id_sta_pass"></span><br>
+        </div>
+		<div class="pure-control-group">
+            <label for="password">IP:</label>
+			<span  id="id_sta_ip"></span><br>
+        </div>
+    </fieldset>
+</form>
+<hr><p><strong>Config Access Point</strong></p>
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">SSID</label>
+            <input id="id_config_ap_ssid" type="text" placeholder="Type AP SSID" required>
+        </div>
+        <div class="pure-control-group">
+            <label for="password">Password</label>
+            <input id="id_config_ap_pass" type="text" placeholder="Type AP Password" required>
+        </div>
+    </fieldset>
+</form>
+<p><strong>Config Station</strong></p>
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">SSID</label>
+            <input id="id_config_sta_ssid" type="text" placeholder="Type STA SSID">
+        </div>
+        <div class="pure-control-group">
+            <label for="password">Password</label>
+            <input id="id_config_sta_pass" type="text" placeholder="Type STA Password">
+        </div>
+		<div class="pure-controls">
+		   <button id="btn_id_secondary" class="btn btn-a btn-sm smooth" onclick="applyWifiConfig()">Apply</button>
+		   <button id="btn_id_success"class="btn btn-b btn-sm smooth" onclick="saveWifiConfig()">Save</button>
+		   <button id="btn_id_pure" class="btn btn-c btn-sm smooth" onclick="rebootDevice()">Reboot</button>
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>
